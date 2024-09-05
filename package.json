@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "npx tailwindcss -i ./public/assets/tailwind.css -o ./public/assets/css/output.css --watch",
     "start": "node server.js",
     "seed": "node seeds/seed.js"
   },
@@ -20,5 +21,10 @@
     "express-session": "^1.17.1",
     "pg": "^8.11.3",
     "sequelize": "^6.33.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.44",
+    "tailwindcss": "^3.4.10"
   }
 }
