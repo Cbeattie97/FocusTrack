@@ -1,19 +1,22 @@
 const router = require('express').Router();
+const { User } = require('../models');
 const withAuth = require('../utils/auth');
 
 // GET the landing page
 router.get('/', async (req, res) => {
     try {
-        res.render('homepage', { users });
-    } catch {
-        res.status(500).json({ message: 'Error retreiving users' });
-    }
-});
-
-router.get('/tasks', async (req, res) => {
-    try {
-        res.render('tasks');
-    } catch {
+        const userData = await User.findAll({
+            attributes: { exclude: ['password_hash'] },
+            order: [['username', 'ASC']],
+        });
+    
+        const users = userData.map((project) => project.get({ plain: true }));
+    
+        res.render('homepage', {
+            users,
+            // logged_in: req.session.logged_in,
+        });
+    } catch (err) {
         res.status(500).json(err);
     }
 });
