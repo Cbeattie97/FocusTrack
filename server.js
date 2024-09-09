@@ -30,7 +30,6 @@ app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// TODO: confirm that the public folder is being used for static files
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
