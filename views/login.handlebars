@@ -1,30 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-
-  <link href="/assets/css/output.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="/assets/css/output.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gray-100 flex flex-col items-center min-h-screen">
 
-  <h2>Login</h2>
+    <header class="w-full bg-blue-500 text-white py-4 text-center mb-4 animate-fade-in">
+        <nav>
+            <a href="/login" class="px-4 py-2 hover:bg-blue-700 rounded">Login</a>
+            <a href="/" class="px-4 py-2 hover:bg-blue-700 rounded">Tasks</a>
+        </nav>
+    </header>
 
-  <form class="form login-form">
-    <div class="form-group">
-      <label for="email-login">email:</label>
-      <input class="form-input" type="text" id="email-login" />
-    </div>
-    <div class="form-group">
-      <label for="password-login">password:</label>
-      <input class="form-input" type="password" id="password-login" />
-    </div>
-    <div class="form-group">
-      <button class="btn btn-primary" type="submit">login</button>
-    </div>
-  </form>
+    <main class="flex flex-col items-center">
+        <h2 class="text-blue-500 mb-6 text-2xl font-semibold">Choose One Below</h2>
+        <div class="bg-white shadow-md rounded-lg p-8 flex space-x-6 max-w-2xl w-full">
+            <!-- Login Section -->
+            <div class="w-1/2 text-center">
+                <h3 class="text-xl mb-4">Login</h3>
+                <form id="login-form" method="POST" action="/api/login" class="space-y-4">
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700 transition-transform transform hover:scale-105">Log In</button>
+                </form>
+            </div>
 
-  <script src="/js/login.js"></script>
+            <!-- New User Section -->
+            <div class="w-1/2 text-center">
+                <h3 class="text-xl mb-4">New User</h3>
+                <form id="register-form" method="POST" action="/api/register" class="space-y-4">
+                    <input type="text" id="new-username" name="username" placeholder="Enter your username" required class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                    <input type="password" id="new-password" name="password" placeholder="Enter your password" required class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700 transition-transform transform hover:scale-105">Register</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="w-full bg-blue-500 text-white py-2 text-center mt-6">
+        <p>&copy; 2024 Task Manager. All rights reserved.</p>
+    </footer>
+
+    <script src="/assets/js/index.js"></script>
 </body>
 </html>
