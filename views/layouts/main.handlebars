@@ -4,32 +4,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FocusTrack</title>
+  <title>{{title}}</title>
   <link href="/assets/css/output.css" rel="stylesheet">
 </head>
 
-<body>
-  <header class="display-flex justify-space-between align-center p-2">
-    <h1>
-    FocusTrack
-    </h1>
-    {{#if logged_in}}
-    <nav>
-      <button class="btn" id="logout">logout</button>
+<body class="bg-gray-100 flex flex-col items-center min-h-screen">
+
+  <!-- Header -->
+  <header class="w-full bg-blue-500 text-white py-4 text-center mb-4">
+    <h1 class="text-3xl font-bold">FocusTrack</h1> 
+    <nav class="mt-2">
+      <a href="/login" class="px-4 py-2 hover:bg-blue-700 rounded">Login</a>
+      <a href="/" class="px-4 py-2 hover:bg-blue-700 rounded">Tasks</a>
     </nav>
-    {{/if}}
   </header>
-  <main class="container container-fluid mt-5">
-    {{{ body }}}
+
+  <!-- Main Content -->
+  <main class="flex flex-col items-center w-full">
+    {{{body}}}
   </main>
-  <footer>
-      
+
+  <!-- Footer -->
+  <footer class="w-full bg-blue-500 text-white py-2 text-center mt-6">
+    <p>&copy; 2024 Task Manager. All rights reserved.</p>
   </footer>
 
-  {{#if logged_in}}
-  <script src="/js/logout.js"></script>
-  {{/if}}
+  <script src="/assets/js/index.js"></script>
 </body>
 
 </html>
-
