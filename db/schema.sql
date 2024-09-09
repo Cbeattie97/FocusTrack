@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS tasks_db;
-CREATE DATABASE tasks_db;
+DROP DATABASE IF EXISTS focustrack_db;
+CREATE DATABASE focustrack_db;

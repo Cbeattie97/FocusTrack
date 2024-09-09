@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
             res.json(err);
         });
 
-        // const users = userData.map((user) => user.get({ plain: true }));
+        // TODO const users = userData.map((user) => user.get({ plain: true }));
         // res.render('homepage', { users });
         res.status(200).json(userData);
 
@@ -26,7 +26,7 @@ router.get('/:id', async (req, res) => {
     // find a single user by id
     try {
         const userData = await User.findByPk(req.params.id, {
-            // include: [{ model: Product }],
+            // TODO include: [{ model: Product }],
             attributes: { exclude: ['password_hash'] },
         });
 
@@ -35,7 +35,7 @@ router.get('/:id', async (req, res) => {
             return;
         }
 
-        // const users = userData.get({ plain: true });
+        // TODO const users = userData.get({ plain: true });
         // res.render('homepage', { users });
         res.status(200).json(userData);
 
@@ -81,7 +81,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// ? should be able to delete via username or email?
+//  TODO should be able to delete via username or email?
 router.delete('/:id', async (req, res) => {
     // delete a user by id
     try {

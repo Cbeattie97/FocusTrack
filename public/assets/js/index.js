@@ -1,3 +1,6 @@
+// TODO - Review existing js code to suit current application
+
+
 let noteForm;
 let noteTitle;
 let noteText;
