@@ -1,3 +1,5 @@
+// TODO: delete or modify this helper file
+
 module.exports = {
   get_emoji: () => {
     const randomNum = Math.random();
