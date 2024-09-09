@@ -1,78 +1,148 @@
-html,
+
 body {
-  height: 100%;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f7f7f7;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
 }
 
-.save-note, .new-note, .clear-btn {
-  display: none;
-}
-
-.icons {
-  margin-left: 15px;
-  margin-right: 15px;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.note-textarea,
-.note-title {
-  color: #000000;
+/* Header Styling */
+.main-header {
   width: 100%;
-  outline: none;
-  border: none;
+  background-color: #007bff;
+  padding: 10px 0;
+  text-align: center;
 }
 
-.note-textarea {
-  resize: none;
-  height: calc(100% - 63px);
-  padding-top: 15px;
+.main-header nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  font-size: 1.2em;
 }
 
-.note-title {
-  height: 50px;
-  margin-top: 13px;
-  font-size: 3rem;
+.main-header nav a:hover {
+  background-color: #0056b3;
+  border-radius: 5px;
 }
 
-.note-title:read-only,
-.note-textarea:read-only {
-  color: #757575;
+/* Main Content Styling */
+.login-main {
+  text-align: center;
+  margin-top: 20px;
 }
 
-.list-container .card {
-  height: calc(100vh - 70px);
-  border-bottom: none;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+.login-main h2 {
+  color: #007bff;
+  margin-bottom: 20px;
 }
 
-.list-container {
-  padding-left: 0;
-}
-
-.list-container .list-group,
-.list-container .list-group-item:first-child,
-.list-container .card {
-  border-top: none;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
-}
-
-.list-item-title {
-  display: inline-block;
-  width: 75%;
-}
-
-.list-container i {
-  font-size: 1.1rem;
-  cursor: pointer;
-}
-
-.list-container .list-group-item {
-  border-left: none;
-  border-right: none;
+/* Login Container */
+.login-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 90%;
+  max-width: 800px;
   padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Login and New User Section Styling */
+.login-section, .new-user-section {
+  width: 45%;
+  text-align: center;
+}
+
+.login-section h3, .new-user-section h3 {
+  margin-bottom: 10px;
+  font-size: 1.4em;
+}
+
+.login-form input, .new-user-section input {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.login-form button, .new-user-section button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-form button:hover, .new-user-section button:hover {
+  background-color: #0056b3;
+}
+
+/* Footer Styling */
+.footer {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #007bff;
+  color: white;
+  position: fixed;
+  bottom: 0;
+}
+
+/* Header Animation */
+.main-header {
+  width: 100%;
+  background-color: #007bff;
+  padding: 10px 0;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out; /* Add animation */
+}
+
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Button Hover Animation */
+.login-form button, .new-user-section button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s; /* Add transform transition */
+}
+
+.login-form button:hover, .new-user-section button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+/* Input Field Focus Animation */
+.login-form input:focus, .new-user-section input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+  transition: box-shadow 0.3s ease-in-out; /* Add shadow effect */
 }
