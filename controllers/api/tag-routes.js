@@ -1,3 +1,5 @@
+// TODO render pages for tags
+
 const router = require('express').Router();
 const { Tag } = require('../../models');
 
@@ -7,7 +9,7 @@ router.get('/', async (req, res) => {
     // find all tags
     try {
         const tagData = await Tag.findAll({
-            // include: [{ model: }],
+            // TODO: include: [{ model: }],
         });
     
         if(!tagData) {    
@@ -26,7 +28,7 @@ router.get('/:id', async (req, res) => {
   // find a single tag by its id
     try {
         const tagData = await Tag.findByPk(req.params.id, {
-        // include: [{ model: }],
+        // TODO: include: [{ model: }],
         });
 
         if (!tagData) {

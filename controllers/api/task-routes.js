@@ -7,12 +7,12 @@ router.get('/', async (req, res) => {
     // find all tasks
     try {
         const taskData = await Task.findAll({
-            // include: [{ model: }],
+            // TODO include: [{ model: }],
         }).catch((err) => {
             res.json(err);
         });
 
-        // const tasks = taskData.map((task) => task.get({ plain: true }));
+        // TODO const tasks = taskData.map((task) => task.get({ plain: true }));
         // res.render('homepage', { tasks });
         res.status(200).json(taskData);
 
@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
     // find a single task by id
     try {
         const taskData = await Task.findByPk(req.params.id, {
-            // include: [{ model: Product }],
+            //TODO include: [{ model: Product }],
         });
 
         if (!taskData) {
@@ -33,7 +33,7 @@ router.get('/:id', async (req, res) => {
             return;
         }
 
-        // const tasks = taskData.get({ plain: true });
+        // TODO const tasks = taskData.get({ plain: true });
         // res.render('homepage', { tasks });
         res.status(200).json(taskData);
 
