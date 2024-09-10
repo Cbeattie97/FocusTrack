@@ -1,34 +1,79 @@
-<h2 class="text-blue-500 mb-6 text-2xl font-semibold">Choose One Below</h2>
-<div class="bg-white shadow-md rounded-lg p-8 flex space-x-6 max-w-2xl w-full">
-  <!-- Login Section -->
-  <div class="w-1/2 text-center">
-    <h3 class="text-xl mb-4">Login</h3>
-    <form id="login-form" method="POST" action="/api/login" class="space-y-4">
-      <input type="text" id="email-or-username" name="emailOrUsername" placeholder="Enter your email or username"
-        required
-        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-      <input type="password" id="password" name="password" placeholder="Enter your password" required
-        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-      <button type="submit"
-        class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700 transition-transform transform hover:scale-105">Log
-        In</button>
-    </form>
+<!-- Hero  -->
+<section
+  class="flex flex-col items-center justify-center h-screen text-center py-16 px-8 text-black space-y-10 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+  <h1 class="text-6xl font-extrabold tracking-tight leading-tight mb-4">Unlock the Power of Task Management</h1>
+  <p class="text-xl opacity-80 max-w-2xl mb-6">Manage your tasks efficiently by adding, tagging, and organizing your
+    to-dos, and more.</p>
+  <div class="flex space-x-4">
   </div>
+</section>
 
-  <!-- New User Section -->
-  <div class="w-1/2 text-center">
-    <h3 class="text-xl mb-4">New User</h3>
-    <form id="register-form" method="POST" action="/api/register" class="space-y-4">
-      <input type="text" id="new-username" name="username" placeholder="Enter your username" required
-        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-      <input type="email" id="new-email" name="email" placeholder="Enter your email" required
-        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-      <input type="password" id="new-password" name="password" placeholder="Enter your password" required
-        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-      <button type="submit"
-        class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700 transition-transform transform hover:scale-105">Register</button>
-    </form>
+<!-- Features -->
+<section id="features" class="py-20 bg-white text-gray-900">
+  <div class="max-w-7xl mx-auto px-8">
+    <h2 class="text-4xl font-bold text-center mb-12">Key Features</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Feature 1: Add Tasks -->
+      <div
+        class="feature-card bg-gray-100 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+        <h3 class="text-2xl font-semibold mb-4">Add Tasks and Tags</h3>
+        <p class="text-gray-700">Easily add tasks with descriptions, tags, and time to keep your workflow organized and
+          prioritized.</p>
+      </div>
+      <!-- Feature 2: Manage Tasks -->
+      <div
+        class="feature-card bg-gray-100 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+        <h3 class="text-2xl font-semibold mb-4">Manage and Delete Tasks</h3>
+        <p class="text-gray-700">Quickly delete or modify tasks to keep your task list up-to-date and relevant.</p>
+      </div>
+      <!-- Feature 3: Time Management -->
+      <div
+        class="feature-card bg-gray-100 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+        <h3 class="text-2xl font-semibold mb-4">Track Time Efficiently</h3>
+        <p class="text-gray-700">Use time tracking features to manage deadlines effectively and stay on schedule.</p>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
-<script src="./assets/js/login.js"></script>
+<!-- Login and Register  -->
+<section id="login" class="py-20 bg-gray-100">
+  <h2 class="text-blue-500 mb-6 text-2xl font-semibold text-center">Choose One Below</h2>
+  <div
+    class="bg-white shadow-md rounded-lg p-8 flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6 max-w-2xl w-full mx-auto">
+    <!-- Login Section -->
+    <div class="w-full md:w-1/2 text-center">
+      <h3 class="text-xl mb-4">Login</h3>
+      <form id="login-form" method="POST" action="/api/login" class="space-y-4">
+        <input type="text" id="email-or-username" name="emailOrUsername" placeholder="Enter your email or username"
+          required
+          class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+        <input type="password" id="password" name="password" placeholder="Enter your password" required
+          class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+        <button type="submit"
+          class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700 transition-transform transform hover:scale-105">Log
+          In</button>
+      </form>
+    </div>
+
+    <!-- New User Section -->
+    <div id="register" class="w-full md:w-1/2 text-center">
+      <h3 class="text-xl mb-4">New User</h3>
+      <form id="register-form" method="POST" action="/api/register" class="space-y-4">
+        <input type="text" id="new-username" name="username" placeholder="Enter your username" required
+          class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+        <input type="email" id="new-email" name="email" placeholder="Enter your email" required
+          class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+        <input type="password" id="new-password" name="password" placeholder="Enter your password" required
+          class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+        <button type="submit"
+          class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700 transition-transform transform hover:scale-105">Register</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-8 text-center">
+  <p>&copy; 2024 FocusTrack. All rights reserved.</p>
+</footer>
