@@ -1,10 +1,10 @@
 <h2 class="text-blue-500 mb-6 text-2xl font-semibold">Choose One Below</h2>
 <div class="bg-white shadow-md rounded-lg p-8 flex space-x-6 max-w-2xl w-full">
-  <!-- Login  -->
+  <!-- Login Section -->
   <div class="w-1/2 text-center">
     <h3 class="text-xl mb-4">Login</h3>
     <form id="login-form" method="POST" action="/api/login" class="space-y-4">
-      <input type="text" id="username" name="username" placeholder="Enter your username" required
+      <input type="email" id="email" name="email" placeholder="Enter your email" required
         class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
       <input type="password" id="password" name="password" placeholder="Enter your password" required
         class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
@@ -13,11 +13,12 @@
         In</button>
     </form>
   </div>
-  <!-- New User  -->
+
+  <!-- New User Section -->
   <div class="w-1/2 text-center">
     <h3 class="text-xl mb-4">New User</h3>
     <form id="register-form" method="POST" action="/api/register" class="space-y-4">
-      <input type="text" id="new-username" name="username" placeholder="Enter your username" required
+      <input type="email" id="new-email" name="email" placeholder="Enter your email" required
         class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
       <input type="password" id="new-password" name="password" placeholder="Enter your password" required
         class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
