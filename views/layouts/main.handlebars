@@ -4,29 +4,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{title}}</title>
+  <title>FocusTrack</title>
   <link href="/assets/css/output.css" rel="stylesheet">
 </head>
 
 <body class="bg-gray-100 flex flex-col items-center min-h-screen">
 
+  <!-- Navigation Bar -->
   <!-- Header -->
-  <header class="w-full bg-blue-500 text-white py-4 text-center mb-4">
-    <h1 class="text-3xl font-bold">FocusTrack</h1> 
-    <nav class="mt-2">
-      <a href="/login" class="px-4 py-2 hover:bg-blue-700 rounded">Login</a>
-      <a href="/" class="px-4 py-2 hover:bg-blue-700 rounded">Tasks</a>
-    </nav>
-  </header>
+<header class="w-full bg-blue-500 text-white py-4">
+  <nav class="flex justify-center space-x-8">
+    <a href="/features" class="px-4 py-2 hover:bg-blue-700 rounded">Features</a>
+    <a href="/login" class="px-4 py-2 hover:bg-blue-700 rounded">Login</a>
+    <a href="/register" class="px-4 py-2 hover:bg-blue-700 rounded">Register</a>
+  </nav>
+</header>
+
 
   <!-- Main Content -->
-  <main class="flex flex-col items-center w-full">
+  <main class="flex flex-col items-center w-full pt-32 px-4">
     {{{body}}}
   </main>
 
   <!-- Footer -->
   <footer class="w-full bg-blue-500 text-white py-2 text-center mt-6">
-    <p>&copy; 2024 Task Manager. All rights reserved.</p>
+    <p>&copy; 2024 FocusTrack. All rights reserved.</p>
   </footer>
 
   <script src="/assets/js/index.js"></script>

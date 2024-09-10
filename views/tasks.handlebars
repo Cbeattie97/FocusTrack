@@ -3,9 +3,6 @@
   <!-- TODO: add header and fix spacing for nav links, could also be removed -->
   <div class="flex justify-between items-center mb-8">
     <nav class="flex space-x-8 text-lg">
-      <a href="/login" class="text-gray-700 hover:text-blue-500">Login</a>
-      <a href="/tasks" class="text-gray-700 hover:text-blue-500">Tasks</a>
-      <a href="/tags" class="text-gray-700 hover:text-blue-500">Tags</a>
     </nav>
   </div>
 
@@ -25,10 +22,16 @@
       {{/each}}
     </ul>
     <form id="add-task-form" method="POST" action="/api/tasks" class="mt-8 space-y-4">
-      <input type="text" id="task-title" name="title" placeholder="Enter task title" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-      <textarea id="task-description" name="description" placeholder="Enter task description" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition"></textarea>
-      <input type="datetime-local" id="task-due-date" name="due_date" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition"> <!-- Match due_date with backend field -->
-      <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-700 transition-transform transform hover:scale-105">Add Task</button>
+      <input type="text" id="task-title" name="title" placeholder="Enter task title" required
+        class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+      <textarea id="task-description" name="description" placeholder="Enter task description" required
+        class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition"></textarea>
+      <input type="datetime-local" id="task-due-date" name="due_date" required
+        class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+      <!-- Match due_date with backend field -->
+      <button type="submit"
+        class="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-700 transition-transform transform hover:scale-105">Add
+        Task</button>
     </form>
   </div>
 
@@ -41,8 +44,11 @@
       {{/each}}
     </ul>
     <form id="add-tag-form" method="POST" action="/api/tags" class="mt-8 space-y-4">
-      <input type="text" id="tag-name" name="name" placeholder="Enter tag name" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-      <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-700 transition-transform transform hover:scale-105">Add Tag</button>
+      <input type="text" id="tag-name" name="name" placeholder="Enter tag name" required
+        class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+      <button type="submit"
+        class="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-700 transition-transform transform hover:scale-105">Add
+        Tag</button>
     </form>
   </div>
 </div>
@@ -59,14 +65,14 @@
         fetch(`/api/tasks/${taskId}`, {
           method: 'DELETE'
         })
-        .then(response => {
-          if (response.ok) {
-            // Remove the task from the DOM
-            event.target.parentElement.remove();
-          } else {
-            alert('Failed to delete the task.');
-          }
-        });
+          .then(response => {
+            if (response.ok) {
+              // Remove the task from the DOM
+              event.target.parentElement.remove();
+            } else {
+              alert('Failed to delete the task.');
+            }
+          });
       }
     });
   });
