@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { User } = require('../../models/User');
+const { User } = require('../../models');
+const bcrypt = require('bcrypt');
 
 // The `/api/users` endpoint
 
@@ -53,6 +54,7 @@ router.post('/', async (req, res) => {
             email: req.body.email,
             password_hash: req.body.password_hash, // TODO: test hashed password in PG Admin
         });
+        console.log(userData);
 
         res.status(200).json(userData);
 
@@ -62,26 +64,26 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    try {
-      const userData = await User.findOne({ where: { username: req.body.username } });
-  
-      console.log(userData);
-      if (!userData) {
+  try {
+    const userData = await User.findOne({ where: { username: req.body.username } });
+    console.log(userData);
+      
+    if (!userData) {
         res
           .status(400)
           .json({ message: 'Incorrect email or password, please try again' });
         return;
       }
-  
+      console.log('checking password');
       const validPassword = await userData.checkPassword(req.body.password);
   
       if (!validPassword) {
         res
           .status(400)
-          .json({ message: 'Incorrect email or password, please try again' });
+          .json({ message: 'Incorrect password, please try again' });
         return;
       }
-  
+      console.log('Password validated');
       req.session.save(() => {
         req.session.user_id = userData.id;
         req.session.logged_in = true;
