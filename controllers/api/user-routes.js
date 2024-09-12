@@ -48,11 +48,12 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     // create a new user
     try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        
         const userData = await User.create({
-            password: await bcrypt.hash(req.body.password, 10),
             username: req.body.username,
             email: req.body.email,
-            password_hash: req.body.password_hash, // TODO: test hashed password in PG Admin
+            password_hash: hashedPassword
         });
         console.log(userData);
 
@@ -65,7 +66,17 @@ router.post('/', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { username: req.body.username } });
+    const userID = req.body.username; 
+    let findOneqry = {};
+
+    // Check if userID contains '@' to determine if it's an email or username
+    if (userID.includes('@')) {
+      findOneqry = { where: { email: userID } };
+    } else {
+      findOneqry = { where: { username: userID } };
+    }
+
+    const userData = await User.findOne(findOneqry);
     console.log(userData);
       
     if (!userData) {
@@ -74,7 +85,6 @@ router.post('/login', async (req, res) => {
           .json({ message: 'Incorrect email or password, please try again' });
         return;
       }
-      console.log('checking password');
       const validPassword = await userData.checkPassword(req.body.password);
   
       if (!validPassword) {
@@ -83,7 +93,6 @@ router.post('/login', async (req, res) => {
           .json({ message: 'Incorrect password, please try again' });
         return;
       }
-      console.log('Password validated');
       req.session.save(() => {
         req.session.user_id = userData.id;
         req.session.logged_in = true;
