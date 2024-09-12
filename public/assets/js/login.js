@@ -28,14 +28,14 @@ const loginFormHandler = async (event) => {
 const registerFormHandler = async (event) => {
   event.preventDefault();
 
-  const new_username = document.querySelector('#new-username').value.trim();
-  const new_email  = document.querySelector('#new-email').value.trim();
-  const new_password = document.querySelector('#new-password').value.trim();
+  const username = document.querySelector('#new-username').value.trim();
+  const email  = document.querySelector('#new-email').value.trim();
+  const password = document.querySelector('#new-password').value.trim();
 
-  if (new_username && new_password && new_email) {
+  if (username && password && email) {
     const response = await fetch('/api/users', {
       method: 'POST',
-      body: JSON.stringify({ new_username, new_email, new_password }),
+      body: JSON.stringify({ username, email, password }),
       headers: { 'Content-Type': 'application/json' },
     });
 
