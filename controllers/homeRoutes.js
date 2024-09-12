@@ -1,8 +1,7 @@
-// TODO: uncomment middleware for authentication
 
 const router = require('express').Router();
 const { User, Task } = require('../models'); 
-// const withAuth = require('../utils/auth'); 
+const withAuth = require('../utils/auth'); 
 
 // GET the landing page
 router.get('/', async (req, res) => {
@@ -26,7 +25,7 @@ router.get('/login', (req, res) => {
 });
 
 // GET the main tasks page after login
-router.get('/tasks', /* withAuth, */ async (req, res) => {
+router.get('/tasks',  withAuth, async (req, res) => {
     try {
         res.render('tasks'); 
     } catch (err) {
@@ -35,7 +34,7 @@ router.get('/tasks', /* withAuth, */ async (req, res) => {
 });
 
 // GET the page to display and manage tasks dynamically
-router.get('/drawDownTasks', /* withAuth, */ async (req, res) => {
+router.get('/drawDownTasks', withAuth, async (req, res) => {
     try {
         const taskData = await Task.findAll({
         });
