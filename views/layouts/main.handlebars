@@ -11,6 +11,11 @@
     <header class="bg-white shadow">
         <nav class="container mx-auto px-4 py-3">
             <!-- Add header content here if we want to add anything -->
+            {{#if logged_in}}
+            <ul>
+              <li><a href="#" id="logout">Logout</a></li>
+            </ul>
+            {{/if}}
         </nav>
     </header>
 
@@ -23,5 +28,8 @@
             <p>&copy; FOCUSTRACK 2024. All rights reserved.</p>
         </div>
     </footer>
+    {{#if logged_in}}
+    <script src="assets/js/logout.js"></script>
+    {{/if}}
 </body>
 </html>

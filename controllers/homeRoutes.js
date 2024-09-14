@@ -5,21 +5,22 @@ const withAuth = require('../utils/auth');
 
 // GET the landing page
 router.get('/', async (req, res) => {
-    try {
-        // Redirect to tasks page directly for now, without auth check
+    //Check if the user is logged on, if so redirect to tasks, otherwise show the login page
+    if (req.session.logged_in) {
         res.redirect('/tasks');
-    } catch (err) {
-        res.status(500).json(err);
+        return;
+    } else {
+        res.redirect('/login');
     }
 });
 
 // GET the login page
 router.get('/login', (req, res) => {
     // If authentication is enabled, check session status
-    // if (req.session.logged_in) {
-    //     res.redirect('/tasks');
-    //     return;
-    // }
+    if (req.session.logged_in) {
+         res.redirect('/tasks');
+         return;
+    }
 
     res.render('login');
 });
@@ -27,7 +28,9 @@ router.get('/login', (req, res) => {
 // GET the main tasks page after login
 router.get('/tasks',  withAuth, async (req, res) => {
     try {
-        res.render('tasks'); 
+        res.render('tasks', {
+            logged_in: req.session.logged_in
+        }); 
     } catch (err) {
         res.status(500).json(err);
     }
