@@ -15,7 +15,7 @@
     </nav>
 
     <!-- Task Creation Form -->
-    <form class="mt-8 space-y-4">
+    <form id="addtasksForm" class="mt-8 space-y-4">
       <div>
         <label for="task-title" class="block text-sm font-medium text-gray-700">Task Title</label>
         <input type="text" id="task-title" name="title" required
@@ -27,9 +27,13 @@
           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
       </div>
       <div>
-        <label for="task-tags" class="block text-sm font-medium text-gray-700">Tags</label>
-        <input type="text" id="task-tags" name="tags"
+        <label for="task-priority" class="block text-sm font-medium text-gray-700">Priority</label>
+        <select id="task-priority" name="priority"
           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+          <option value="1">1 - High</option>
+          <option value="2">2 - Medium</option>
+          <option value="3">3 - Low</option>
+        </select>
       </div>
       <div>
         <label for="task-due-date" class="block text-sm font-medium text-gray-700">Due Date</label>
@@ -41,6 +45,7 @@
         Add Task
       </button>
     </form>
+    <script src="./assets/js/addtask.js"></script>
   </div>
 
   <!-- Main Content -->

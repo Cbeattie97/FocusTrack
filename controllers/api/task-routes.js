@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Task } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // The `/api/tasks` endpoint
 
@@ -42,18 +43,18 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
     // create a new task
+    console.log(req.body);
+    console.log(req.session.user_id);
     try {
         const taskData = await Task.create({
-            title: req.body.title,
-            description: req.body.description,
-            priority: req.body.priority,
+            ...req.body,
+            user_id: req.session.user_id,
         });
-
         res.status(200).json(taskData);
-
     } catch (err) {
+        console.error(err);
         res.status(400).json({ message: 'Error creating task' });
     }
 });
