@@ -9,3 +9,5 @@ router.get('js/pomodoro', (req, res) => {
 });
 
 module.exports = router;
+
+// TODO fix timer functionality

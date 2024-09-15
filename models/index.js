@@ -1,3 +1,4 @@
+// Sequelize models
 const User = require('./User');
 const Task = require('./Task');
 const Tag = require('./Tag');

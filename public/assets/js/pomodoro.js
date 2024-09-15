@@ -41,3 +41,5 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("timerDisplay").textContent = formatTime(remainingTime);
     document.getElementById("startButton").addEventListener("click", startPomodoro);
 });
+
+// TODO fix timer functionality
