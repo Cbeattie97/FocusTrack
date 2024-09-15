@@ -1,7 +1,7 @@
 <div class="flex h-screen bg-gray-100">
   <!-- Left Sidebar -->
   <div class="w-64 bg-white shadow-lg p-6">
-    <h1 class="text-2xl font-bold mb-8">Task</h1>
+    <h1 class="text-2xl font-bold mb-8"></h1>
     <nav class="space-y-4">
       <a href="#" class="flex items-center text-gray-600 hover:text-gray-900">
         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -45,6 +45,18 @@
         Add Task
       </button>
     </form>
+    <div class="mt-8 flip-clock-container">
+      <h2 class="text-lg font-semibold mb-4">Pomodoro Timer</h2>
+      <div class="flip-clock">
+        <div class="flip-clock-minutes">25</div>
+        <div class="flip-clock-colon">:</div>
+        <div class="flip-clock-seconds">00</div>
+      </div>
+      <div class="pomodoro-buttons">
+        <button id="start-pomodoro">Start</button>
+        <button id="reset-pomodoro">Reset</button>
+      </div>
+    </div>
     <script src="./assets/js/addtask.js"></script>
   </div>
 
@@ -53,31 +65,19 @@
     <!-- Top Navigation -->
     <div class="bg-white shadow-sm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-          <div class="flex">
-            <div class="flex-shrink-0 flex items-center">
-            </div>
-            <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
-              <a href="#"
-                class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                List
-              </a>
-            </div>
-          </div>
+        <div class="flex justify-between items-center h-16">
           <div class="flex items-center">
+            <h1 class="text-2xl font-bold text-lightgrey-600">Focustrack</h1>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div id="live-datetime" class="text-gray-400 text-sm font-medium"></div>
             <button
               class="p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-              </svg>
-            </button>
-            <button
-              class="ml-3 p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                </path>
               </svg>
             </button>
           </div>
@@ -90,12 +90,7 @@
       <div class="max-w-7xl mx-auto">
         <!-- Header -->
         <div class="flex justify-between items-center mb-8">
-          <h1 class="text-3xl font-bold">Projects</h1>
-          <select id="time-filter" class="p-2 border rounded">
-            <option>This Month</option>
-            <option>Last Month</option>
-            <option>This Year</option>
-          </select>
+
         </div>
 
         <!-- Task Columns -->
@@ -104,7 +99,7 @@
             <h2 class="text-xl font-semibold mb-4">TODO</h2>
             <div class="task-list space-y-4">
               {{#each todoTasks}}
-                {{> task-card}}
+              {{> task-card}}
               {{/each}}
             </div>
           </div>
@@ -113,7 +108,7 @@
             <h2 class="text-xl font-semibold mb-4">IN PROGRESS</h2>
             <div class="task-list space-y-4">
               {{#each inProgressTasks}}
-                {{> task-card}}
+              {{> task-card}}
               {{/each}}
             </div>
           </div>
@@ -122,7 +117,7 @@
             <h2 class="text-xl font-semibold mb-4">COMPLETED</h2>
             <div class="task-list space-y-4">
               {{#each completedTasks}}
-                {{> task-card}}
+              {{> task-card}}
               {{/each}}
             </div>
           </div>
