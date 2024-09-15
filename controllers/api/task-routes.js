@@ -74,45 +74,43 @@ router.post('/', withAuth, async (req, res) => {
       }
 });
 
-router.put('/:id', async (req, res) => {
-    // update a task by its id value
+router.put('/:id', withAuth, async (req, res) => {
     try {
         const taskData = await Task.update(req.body, {
             where: {
                 id: req.params.id,
+                user_id: req.session.user_id,
             },
         });
-    
+
         if (!taskData[0]) {
-            res.status(404).json({ message: 'No task found with that id!' });
+            res.status(404).json({ message: 'No task found with this id!', success: false });
             return;
         }
-    
-        res.status(200).json(taskData);
-    
+
+        res.status(200).json({ message: 'Task updated successfully', success: true });
     } catch (err) {
-        res.status(400).json(err);
+        res.status(500).json({ message: 'Error updating task', success: false, error: err.message });
     }
 });
 
-router.delete('/:id', async (req, res) => {
-    // delete a task by its id
+router.delete('/:id', withAuth, async (req, res) => {
     try {
         const taskData = await Task.destroy({
             where: {
-            id: req.params.id,
+                id: req.params.id,
+                user_id: req.session.user_id,
             },
         });
-    
-        if (!userData) {
-            res.status(404).json({ message: 'No task found with that id!' });
+
+        if (!taskData) {
+            res.status(404).json({ message: 'No task found with this id!', success: false });
             return;
         }
-    
-        res.status(200).json(taskData);
 
+        res.status(200).json({ message: 'Task deleted successfully', success: true });
     } catch (err) {
-        res.status(500).json(err);
+        res.status(500).json({ message: 'Error deleting task', success: false, error: err.message });
     }
 });
 
