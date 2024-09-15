@@ -9,7 +9,10 @@ const addtaskFormHandler = async (event) => {
     
     console.log('Sending priority:', priority);
     
-    if (title && description && due_date && priority) {
+    if (!due_date) {
+        alert('Please enter a due date');
+        return;
+    } else if (title && description && due_date && priority) {
         const response = await fetch('/api/tasks', {
             method: 'POST',
             body: JSON.stringify({ title, description, due_date, priority, status }),
