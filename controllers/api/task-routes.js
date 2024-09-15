@@ -45,33 +45,15 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', withAuth, async (req, res) => {
     try {
-        // Destructure assignee user_id from request body
-        const { title, description, due_date, priority, status } = req.body;
-        assignee_user_id = req.session.user_id;
-    
-        // Create a new task with the provided data and the logged-in user's ID
-        const taskData = await Task.create({
-          title,
-          description,
-          due_date,
-          priority,
-          status,
-          user_id: assignee_user_id, // Creator of the task
+        console.log('Received task data:', req.body);
+        const newTask = await Task.create({
+            ...req.body,
+            user_id: req.session.user_id,
         });
-
-        // Check if an Assignee user_id is provided, if so, create a TaskAssignee entry
-        if (assignee_user_id) {
-          const assigneeData = await TaskAssignee.create({
-            task_id: taskData.id,
-            user_id: assignee_user_id,
-          });
-        }
-    
-        res.status(200).json({ taskData, message: 'Task and assignee created successfully!' });
-      } catch (err) {
-        console.error(err);
-        res.status(400).json({ message: 'Error creating task or assignee' });
-      }
+        res.status(200).json(newTask);
+    } catch (err) {
+        res.status(400).json(err);
+    }
 });
 
 router.put('/:id', withAuth, async (req, res) => {

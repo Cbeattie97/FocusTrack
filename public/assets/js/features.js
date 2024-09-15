@@ -57,25 +57,3 @@ document.getElementById('reset-pomodoro').addEventListener('click', function() {
 
 // Initialize Pomodoro display
 updatePomodoroDisplay();
-
-function updateTaskStatus(taskId, newStatus) {
-  const taskCard = document.getElementById(`task-${taskId}`);
-  if (!taskCard) return;
-
-  taskCard.classList.add('moving');
-
-  setTimeout(() => {
-    const newColumn = document.querySelector(`[data-status="${newStatus}"] .task-list`);
-    if (newColumn) {
-      newColumn.appendChild(taskCard);
-      if (newStatus === 'Completed') {
-        taskCard.classList.remove('bg-white');
-        taskCard.classList.add('bg-green-100');
-      } else {
-        taskCard.classList.remove('bg-green-100');
-        taskCard.classList.add('bg-white');
-      }
-    }
-    taskCard.classList.remove('moving');
-  }, 300);
-}
