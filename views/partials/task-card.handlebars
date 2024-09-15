@@ -1,4 +1,4 @@
-<div id="task-{{id}}" class="task-card bg-white p-4 rounded-lg shadow {{#if (eq status 'Completed')}}bg-green-100{{/if}}">
+<div id="task-{{id}}" class="task-card p-4 rounded-lg shadow transition-colors duration-300 ease-in-out {{#if (eq status 'Completed')}}bg-green-100{{else}}bg-white{{/if}}">
   <div class="flex justify-between items-center mb-2">
     <h3 class="text-lg font-semibold">{{title}}</h3>
     <select onchange="updateTaskStatus('{{id}}', this.value)" class="text-sm border rounded">
