@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Task } = require('../../models');
+const { Task, TaskAssignee } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // The `/api/tasks` endpoint
@@ -44,19 +44,34 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', withAuth, async (req, res) => {
-    // create a new task
-    console.log(req.body);
-    console.log(req.session.user_id);
     try {
+        // Destructure assignee user_id from request body
+        const { title, description, due_date, priority, status } = req.body;
+        assignee_user_id = req.session.user_id;
+    
+        // Create a new task with the provided data and the logged-in user's ID
         const taskData = await Task.create({
-            ...req.body,
-            user_id: req.session.user_id,
+          title,
+          description,
+          due_date,
+          priority,
+          status,
+          user_id: assignee_user_id, // Creator of the task
         });
-        res.status(200).json(taskData);
-    } catch (err) {
+
+        // Check if an Assignee user_id is provided, if so, create a TaskAssignee entry
+        if (assignee_user_id) {
+          const assigneeData = await TaskAssignee.create({
+            task_id: taskData.id,
+            user_id: assignee_user_id,
+          });
+        }
+    
+        res.status(200).json({ taskData, message: 'Task and assignee created successfully!' });
+      } catch (err) {
         console.error(err);
-        res.status(400).json({ message: 'Error creating task' });
-    }
+        res.status(400).json({ message: 'Error creating task or assignee' });
+      }
 });
 
 router.put('/:id', async (req, res) => {

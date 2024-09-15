@@ -13,4 +13,7 @@ module.exports = {
 
     return `<span for="img" aria-label="book">${book}</span>`;
   },
+  eq: function (a, b) {
+    return a === b;
+  },
 };

@@ -28,9 +28,33 @@ router.get('/login', (req, res) => {
 // GET the main tasks page after login
 router.get('/tasks',  withAuth, async (req, res) => {
     try {
+        // Find the logged in user based on the session ID
+        const userData = await User.findByPk(req.session.user_id, {
+            attributes: { exclude: ['password'] },
+            include: [{ model: Task }],
+        });
+
+        const user = userData.get({ plain: true });
+        const tasks = user.tasks; // Extract tasks
+
+        // Group tasks by status
+        const todoTasks = tasks.filter(task => task.status === 'Todo');
+        const inProgressTasks = tasks.filter(task => task.status === 'In Progress');
+        const completedTasks = tasks.filter(task => task.status === 'Completed');
+        console.log(todoTasks);
+        console.log(inProgressTasks);
+        console.log(completedTasks);
+
+        //res.render('tasks', {
+        //    tasks,
+        //    logged_in: req.session.logged_in
+        //});
         res.render('tasks', {
+            todoTasks,
+            inProgressTasks,
+            completedTasks,
             logged_in: req.session.logged_in
-        }); 
+        });
     } catch (err) {
         res.status(500).json(err);
     }
