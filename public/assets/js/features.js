@@ -71,4 +71,11 @@ function updateTaskStatus(taskId, newStatus) {
     }
     taskCard.classList.remove('moving');
   }, 300);
+
+  // Update the task card appearance
+  if (newStatus === 'Completed') {
+    taskCard.classList.add('bg-green-100', 'text-green-800');
+  } else {
+    taskCard.classList.remove('bg-green-100', 'text-green-800');
+  }
 }
