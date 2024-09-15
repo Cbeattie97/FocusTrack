@@ -41,18 +41,12 @@ router.get('/tasks',  withAuth, async (req, res) => {
         const todoTasks = tasks.filter(task => task.status === 'Todo');
         const inProgressTasks = tasks.filter(task => task.status === 'In Progress');
         const completedTasks = tasks.filter(task => task.status === 'Completed');
-        console.log(todoTasks);
-        console.log(inProgressTasks);
-        console.log(completedTasks);
-
-        //res.render('tasks', {
-        //    tasks,
-        //    logged_in: req.session.logged_in
-        //});
+        
         res.render('tasks', {
             todoTasks,
             inProgressTasks,
             completedTasks,
+            username: user.username,
             logged_in: req.session.logged_in
         });
     } catch (err) {
