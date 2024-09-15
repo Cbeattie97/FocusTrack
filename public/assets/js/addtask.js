@@ -71,20 +71,20 @@ function createTaskElement(task) {
 
 function getPriorityClass(priority) {
     console.log('getPriorityClass received:', priority);
-    switch (priority) {
-        case '1000': return 'bg-red-100 text-red-600';
-        case '2000': return 'bg-yellow-100 text-yellow-600';
-        case '3000': return 'bg-green-100 text-green-600';
+    switch (Number(priority)) {
+        case 1: return 'bg-red-100 text-red-600';
+        case 2: return 'bg-yellow-100 text-yellow-600';
+        case 3: return 'bg-green-100 text-green-600';
         default: return 'bg-gray-100 text-gray-600';
     }
 }
 
 function getPriorityText(priority) {
     console.log('getPriorityText received:', priority);
-    switch (priority) {
-        case '1000': return 'High';
-        case '2000': return 'Medium';
-        case '3000': return 'Low';
+    switch (Number(priority)) {
+        case 1: return 'High';
+        case 2: return 'Medium';
+        case 3: return 'Low';
         default: return 'Unknown';
     }
 }
