@@ -1,7 +1,7 @@
 <div class="flex h-screen bg-gray-100">
   <!-- Left Sidebar -->
   <div class="w-64 bg-white shadow-lg p-6">
-    <h1 class="text-2xl font-bold mb-8">Task</h1>
+    <h1 class="text-2xl font-bold mb-8"></h1>
     <nav class="space-y-4">
       <a href="#" class="flex items-center text-gray-600 hover:text-gray-900">
         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -10,12 +10,12 @@
             d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
           </path>
         </svg>
-        My Tasks
+        Create a task
       </a>
     </nav>
 
     <!-- Task Creation Form -->
-    <form class="mt-8 space-y-4">
+    <form id="addtasksForm" class="mt-8 space-y-4">
       <div>
         <label for="task-title" class="block text-sm font-medium text-gray-700">Task Title</label>
         <input type="text" id="task-title" name="title" required
@@ -27,9 +27,13 @@
           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
       </div>
       <div>
-        <label for="task-tags" class="block text-sm font-medium text-gray-700">Tags</label>
-        <input type="text" id="task-tags" name="tags"
+        <label for="task-priority" class="block text-sm font-medium text-gray-700">Priority</label>
+        <select id="task-priority" name="priority"
           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+          <option value="1">1 - High</option>
+          <option value="2">2 - Medium</option>
+          <option value="3">3 - Low</option>
+        </select>
       </div>
       <div>
         <label for="task-due-date" class="block text-sm font-medium text-gray-700">Due Date</label>
@@ -41,6 +45,19 @@
         Add Task
       </button>
     </form>
+    <div class="mt-8 flip-clock-container">
+      <h2 class="text-lg font-semibold mb-4">Pomodoro Timer</h2>
+      <div class="flip-clock">
+        <div class="flip-clock-minutes">25</div>
+        <div class="flip-clock-colon">:</div>
+        <div class="flip-clock-seconds">00</div>
+      </div>
+      <div class="pomodoro-buttons">
+        <button id="start-pomodoro">Start</button>
+        <button id="reset-pomodoro">Reset</button>
+      </div>
+    </div>
+    <script src="./assets/js/addtask.js"></script>
   </div>
 
   <!-- Main Content -->
@@ -48,31 +65,19 @@
     <!-- Top Navigation -->
     <div class="bg-white shadow-sm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-          <div class="flex">
-            <div class="flex-shrink-0 flex items-center">
-            </div>
-            <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
-              <a href="#"
-                class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                List
-              </a>
-            </div>
-          </div>
+        <div class="flex justify-between items-center h-16">
           <div class="flex items-center">
+            <h1 class="text-2xl font-bold text-lightgrey-600">Focustrack</h1>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div id="live-datetime" class="text-gray-400 text-sm font-medium"></div>
             <button
               class="p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-              </svg>
-            </button>
-            <button
-              class="ml-3 p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                </path>
               </svg>
             </button>
           </div>
@@ -85,141 +90,39 @@
       <div class="max-w-7xl mx-auto">
         <!-- Header -->
         <div class="flex justify-between items-center mb-8">
-          <h1 class="text-3xl font-bold">Projects</h1>
-          <select id="time-filter" class="p-2 border rounded">
-            <option>This Month</option>
-            <option>Last Month</option>
-            <option>This Year</option>
-          </select>
+
         </div>
 
         <!-- Task Columns -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-  <!-- To Do Column -->
-  <div>
-    <h2 class="text-xl font-semibold mb-4 flex items-center">
-      <span class="w-2 h-2 bg-orange-400 rounded-full mr-2"></span>
-      TODO
-      <span class="ml-2 text-gray-500 text-sm">3</span>
-    </h2>
-    <div class="space-y-4">
-      {{!-- TODO: COMMENT OUT EVERYTHING BETWEEN THESE MARKERS WHEN BACK END IS WORKING --}}
-      {{!-- START: REMOVE WHEN BACKEND READY --}}
-      <div class="bg-white p-4 rounded-lg shadow">
-        <h3 class="text-lg font-semibold mb-2">Design UI mockups</h3>
-        <p class="text-sm text-gray-600 mb-3">Create initial designs for the new project dashboard</p>
-        <div class="flex justify-between items-center">
-          <span class="text-sm font-medium px-2 py-1 rounded bg-red-100 text-red-600">High Priority</span>
-          <div class="flex -space-x-2">
-            <img src="https://via.placeholder.com/30" alt="User 1" class="w-6 h-6 rounded-full border-2 border-white">
-            <img src="https://via.placeholder.com/30" alt="User 2" class="w-6 h-6 rounded-full border-2 border-white">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div id="todo-column" class="task-column" data-status="Todo">
+            <h2 class="text-xl font-semibold mb-4">TODO</h2>
+            <div class="task-list space-y-4">
+              {{#each todoTasks}}
+              {{> task-card}}
+              {{/each}}
+            </div>
           </div>
-        </div>
-        <div class="mt-3 flex items-center text-sm text-gray-500">
-          <span class="mr-4">2 💬</span>
-          <span class="mr-4">3 📎</span>
-          <span>Oct 25</span>
-        </div>
-      </div>
-      <div class="bg-white p-4 rounded-lg shadow">
-        <h3 class="text-lg font-semibold mb-2">Write API documentation</h3>
-        <p class="text-sm text-gray-600 mb-3">Document the new API endpoints for the frontend team</p>
-        <div class="flex justify-between items-center">
-          <span class="text-sm font-medium px-2 py-1 rounded bg-yellow-100 text-yellow-600">Medium Priority</span>
-          <div class="flex -space-x-2">
-            <img src="https://via.placeholder.com/30" alt="User 3" class="w-6 h-6 rounded-full border-2 border-white">
-          </div>
-        </div>
-        <div class="mt-3 flex items-center text-sm text-gray-500">
-          <span class="mr-4">0 💬</span>
-          <span class="mr-4">1 📎</span>
-          <span>Oct 28</span>
-        </div>
-      </div>
-      {{!-- END: REMOVE WHEN BACKEND READY --}}
-      
-      {{!-- TODO: UNCOMMENT THE FOLLOWING WHEN BACK END IS WORKING --}}
-      {{!-- START: UNCOMMENT WHEN BACKEND READY
-      {{#each todoTasks}}
-        {{> task-card}}
-      {{/each}}
-      END: UNCOMMENT WHEN BACKEND READY --}}
-    </div>
-    <button class="mt-4 w-full p-2 bg-orange-100 text-orange-600 rounded-lg hover:bg-orange-200">+</button>
-  </div>
 
-  <!-- In Progress Column -->
-  <div>
-    <h2 class="text-xl font-semibold mb-4 flex items-center">
-      <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
-      IN PROGRESS
-      <span class="ml-2 text-gray-500 text-sm">2</span>
-    </h2>
-    <div class="space-y-4">
-      {{!-- TODO: COMMENT OUT EVERYTHING BETWEEN THESE MARKERS WHEN BACK END IS WORKING --}}
-      {{!-- START: REMOVE WHEN BACKEND READY --}}
-      <div class="bg-white p-4 rounded-lg shadow">
-        <h3 class="text-lg font-semibold mb-2">Implement user authentication</h3>
-        <p class="text-sm text-gray-600 mb-3">Set up JWT-based authentication for the application</p>
-        <div class="flex justify-between items-center">
-          <span class="text-sm font-medium px-2 py-1 rounded bg-blue-100 text-blue-600">Medium Priority</span>
-          <div class="flex -space-x-2">
-            <img src="https://via.placeholder.com/30" alt="User 4" class="w-6 h-6 rounded-full border-2 border-white">
-            <img src="https://via.placeholder.com/30" alt="User 5" class="w-6 h-6 rounded-full border-2 border-white">
+          <div id="in-progress-column" class="task-column" data-status="In Progress">
+            <h2 class="text-xl font-semibold mb-4">IN PROGRESS</h2>
+            <div class="task-list space-y-4">
+              {{#each inProgressTasks}}
+              {{> task-card}}
+              {{/each}}
+            </div>
           </div>
-        </div>
-        <div class="mt-3 flex items-center text-sm text-gray-500">
-          <span class="mr-4">3 💬</span>
-          <span class="mr-4">2 📎</span>
-          <span>Oct 30</span>
-        </div>
-      </div>
-      {{!-- END: REMOVE WHEN BACKEND READY --}}
-      
-      {{!-- TODO: UNCOMMENT THE FOLLOWING WHEN BACK END IS WORKING --}}
-      {{!-- START: UNCOMMENT WHEN BACKEND READY
-      {{#each inProgressTasks}}
-        {{> task-card}}
-      {{/each}}
-      END: UNCOMMENT WHEN BACKEND READY --}}
-    </div>
-    <button class="mt-4 w-full p-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200">+</button>
-  </div>
 
-  <!-- Completed Column -->
-  <div>
-    <h2 class="text-xl font-semibold mb-4 flex items-center">
-      <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-      COMPLETED
-      <span class="ml-2 text-gray-500 text-sm">1</span>
-    </h2>
-    <div class="space-y-4">
-      {{!-- TODO: COMMENT OUT EVERYTHING BETWEEN THESE MARKERS WHEN BACK END IS WORKING --}}
-      {{!-- START: REMOVE WHEN BACKEND READY --}}
-      <div class="bg-white p-4 rounded-lg shadow">
-        <h3 class="text-lg font-semibold mb-2">Set up project repository</h3>
-        <p class="text-sm text-gray-600 mb-3">Initialize Git repo and set up basic project structure</p>
-        <div class="flex justify-between items-center">
-          <span class="text-sm font-medium px-2 py-1 rounded bg-green-100 text-green-600">Low Priority</span>
-          <div class="flex -space-x-2">
-            <img src="https://via.placeholder.com/30" alt="User 6" class="w-6 h-6 rounded-full border-2 border-white">
+          <div id="completed-column" class="task-column" data-status="Completed">
+            <h2 class="text-xl font-semibold mb-4">COMPLETED</h2>
+            <div class="task-list space-y-4">
+              {{#each completedTasks}}
+              {{> task-card}}
+              {{/each}}
+            </div>
           </div>
         </div>
-        <div class="mt-3 flex items-center text-sm text-gray-500">
-          <span class="mr-4">1 💬</span>
-          <span class="mr-4">0 📎</span>
-          <span>Oct 20</span>
-        </div>
       </div>
-      {{!-- END: REMOVE WHEN BACKEND READY --}}
-      
-      {{!-- TODO: UNCOMMENT THE FOLLOWING WHEN BACK END IS WORKING --}}
-      {{!-- START: UNCOMMENT WHEN BACKEND READY
-      {{#each completedTasks}}
-        {{> task-card}}
-      {{/each}}
-      END: UNCOMMENT WHEN BACKEND READY --}}
     </div>
-    <button class="mt-4 w-full p-2 bg-green-100 text-green-600 rounded-lg hover:bg-green-200">+</button>
   </div>
 </div>

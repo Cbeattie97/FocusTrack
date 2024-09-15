@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
+const moment = require('moment');
 const routes = require('./controllers');
 const helpers = require('./utils/helpers');
 
@@ -11,7 +12,16 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const hbs = exphbs.create({ helpers });
+const hbs = exphbs.create({
+  helpers: {
+    formatDate: function (date) {
+      return moment(date).format('MMM D, YYYY');
+    },
+    eq: function (v1, v2) {
+      return v1 === v2;
+    }
+  }
+});
 
 const sess = {
   secret: 'Super secret secret',

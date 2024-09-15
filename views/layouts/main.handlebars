@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FOCUSTRACK</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="flex flex-col min-h-screen bg-gray-100">
     <header class="bg-white shadow">
         <nav class="container mx-auto px-4 py-3">
             <!-- Add header content here if we want to add anything -->
+            {{#if logged_in}}
+            <ul>
+              <li><a href="#" id="logout">Logout</a></li>
+            </ul>
+            {{/if}}
         </nav>
     </header>
 
@@ -23,7 +28,10 @@
             <p>&copy; FOCUSTRACK 2024. All rights reserved.</p>
         </div>
     </footer>
-
-    <script src="/js/script.js"></script>
+    {{#if logged_in}}
+    <script src="assets/js/logout.js"></script>
+    {{/if}}
+    <script src="/assets/js/taskManager.js"></script>
+    <script src="/assets/js/features.js"></script>
 </body>
 </html>

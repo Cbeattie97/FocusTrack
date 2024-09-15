@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { Task } = require('../../models');
+const { Task, TaskAssignee } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // The `/api/tasks` endpoint
 
@@ -42,61 +43,74 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
-    // create a new task
+router.post('/', withAuth, async (req, res) => {
     try {
+        // Destructure assignee user_id from request body
+        const { title, description, due_date, priority, status } = req.body;
+        assignee_user_id = req.session.user_id;
+    
+        // Create a new task with the provided data and the logged-in user's ID
         const taskData = await Task.create({
-            title: req.body.title,
-            description: req.body.description,
-            priority: req.body.priority,
+          title,
+          description,
+          due_date,
+          priority,
+          status,
+          user_id: assignee_user_id, // Creator of the task
         });
 
-        res.status(200).json(taskData);
-
-    } catch (err) {
-        res.status(400).json({ message: 'Error creating task' });
-    }
+        // Check if an Assignee user_id is provided, if so, create a TaskAssignee entry
+        if (assignee_user_id) {
+          const assigneeData = await TaskAssignee.create({
+            task_id: taskData.id,
+            user_id: assignee_user_id,
+          });
+        }
+    
+        res.status(200).json({ taskData, message: 'Task and assignee created successfully!' });
+      } catch (err) {
+        console.error(err);
+        res.status(400).json({ message: 'Error creating task or assignee' });
+      }
 });
 
-router.put('/:id', async (req, res) => {
-    // update a task by its id value
+router.put('/:id', withAuth, async (req, res) => {
     try {
         const taskData = await Task.update(req.body, {
             where: {
                 id: req.params.id,
+                user_id: req.session.user_id,
             },
         });
-    
+
         if (!taskData[0]) {
-            res.status(404).json({ message: 'No task found with that id!' });
+            res.status(404).json({ message: 'No task found with this id!', success: false });
             return;
         }
-    
-        res.status(200).json(taskData);
-    
+
+        res.status(200).json({ message: 'Task updated successfully', success: true });
     } catch (err) {
-        res.status(400).json(err);
+        res.status(500).json({ message: 'Error updating task', success: false, error: err.message });
     }
 });
 
-router.delete('/:id', async (req, res) => {
-    // delete a task by its id
+router.delete('/:id', withAuth, async (req, res) => {
     try {
         const taskData = await Task.destroy({
             where: {
-            id: req.params.id,
+                id: req.params.id,
+                user_id: req.session.user_id,
             },
         });
-    
-        if (!userData) {
-            res.status(404).json({ message: 'No task found with that id!' });
+
+        if (!taskData) {
+            res.status(404).json({ message: 'No task found with this id!', success: false });
             return;
         }
-    
-        res.status(200).json(taskData);
 
+        res.status(200).json({ message: 'Task deleted successfully', success: true });
     } catch (err) {
-        res.status(500).json(err);
+        res.status(500).json({ message: 'Error deleting task', success: false, error: err.message });
     }
 });
 

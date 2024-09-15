@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
   padding: 0;
@@ -145,4 +144,123 @@ body {
   border-color: #007bff;
   box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
   transition: box-shadow 0.3s ease-in-out; /* Add shadow effect */
+}
+
+/* Flip Clock Styles */
+.flip-clock-container {
+  perspective: 1000px;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.flip-clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #333;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+.flip-clock-minutes,
+.flip-clock-seconds {
+  position: relative;
+  width: 60px;
+  height: 80px;
+  background: #fff;
+  font-size: 50px;  
+  line-height: 80px;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  overflow: hidden;
+  margin: 0 5px;
+}
+
+.flip-clock-colon {
+  font-size: 50px;  
+  color: #fff;
+  margin: 0 5px;
+  line-height: 80px;
+}
+
+.pomodoro-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+#start-pomodoro,
+#reset-pomodoro {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  margin: 0 8px;
+}
+
+#start-pomodoro {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#reset-pomodoro {
+  background-color: #f44336;
+  color: white;
+}
+
+#start-pomodoro:hover,
+#reset-pomodoro:hover {
+  transform: scale(1.05);
+}
+
+#live-datetime {
+  font-family: 'Arial', sans-serif;
+  letter-spacing: 0.5px;
+  padding: 8px 12px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.task-card {
+  transition: all 0.3s ease;
+}
+
+.task-card.moving {
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.text-indigo-600 {
+  color: #4f46e5;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+#live-datetime {
+  background-color: #f3f4f6;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+
+#live-datetime:hover {
+  background-color: #e5e7eb;
 }
