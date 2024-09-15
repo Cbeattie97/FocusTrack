@@ -18,12 +18,8 @@ const addtaskFormHandler = async (event) => {
   
         if (response.ok) {
             const newTask = await response.json();
-            console.log('New task:', newTask); // Add this line
-            if (newTask.taskData) {
-                addNewTaskToDOM(newTask.taskData);
-            } else {
-                console.error('Task data is missing from the response');
-            }
+            console.log('New task:', newTask);
+            addNewTaskToDOM(newTask);
             document.querySelector('#addtasksForm').reset();
         } else {
             alert(response.statusText);
@@ -32,7 +28,7 @@ const addtaskFormHandler = async (event) => {
 };
 
 function addNewTaskToDOM(task) {
-    console.log('Adding new task to DOM:', task); // Debug log
+    console.log('Adding new task to DOM:', task);
     const todoColumn = document.querySelector('#todo-column .task-list');
     const taskElement = createTaskElement(task);
     todoColumn.appendChild(taskElement);
