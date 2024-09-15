@@ -35,11 +35,16 @@ function updateTaskStatus(taskId, newStatus) {
             const taskElement = document.getElementById(`task-${taskId}`);
             const newColumn = document.getElementById(`${newStatus.toLowerCase().replace(' ', '-')}-column`);
             if (taskElement && newColumn) {
-                newColumn.querySelector('.task-list').appendChild(taskElement);
+                const currentColumn = taskElement.closest('.task-column');
+                if (currentColumn !== newColumn) {
+                    newColumn.querySelector('.task-list').appendChild(taskElement);
+                }
                 if (newStatus === 'Completed') {
+                    taskElement.classList.remove('bg-white');
                     taskElement.classList.add('bg-green-100');
                 } else {
                     taskElement.classList.remove('bg-green-100');
+                    taskElement.classList.add('bg-white');
                 }
             }
         } else {

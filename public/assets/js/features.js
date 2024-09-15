@@ -68,6 +68,13 @@ function updateTaskStatus(taskId, newStatus) {
     const newColumn = document.querySelector(`[data-status="${newStatus}"] .task-list`);
     if (newColumn) {
       newColumn.appendChild(taskCard);
+      if (newStatus === 'Completed') {
+        taskCard.classList.remove('bg-white');
+        taskCard.classList.add('bg-green-100');
+      } else {
+        taskCard.classList.remove('bg-green-100');
+        taskCard.classList.add('bg-white');
+      }
     }
     taskCard.classList.remove('moving');
   }, 300);
