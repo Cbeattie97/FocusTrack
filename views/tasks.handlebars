@@ -127,3 +127,16 @@
 </div> 
 
 <script src="/public/assets/js/pomodoro.js"></script>
+
+<div id="editTaskModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+  <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+    <h3 class="text-lg font-bold mb-4">Edit Task</h3>
+    <input id="editTaskTitle" type="text" class="w-full mb-3 p-2 border rounded" placeholder="Task Title">
+    <textarea id="editTaskDescription" class="w-full mb-3 p-2 border rounded" placeholder="Task Description"></textarea>
+    <input id="editTaskTag" type="text" class="w-full mb-3 p-2 border rounded" placeholder="Add Tag">
+    <div class="flex justify-end">
+      <button id="saveTaskEdit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-2">Save</button>
+      <button id="closeTaskEdit" class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">Close</button>
+    </div>
+  </div>
+</div>
