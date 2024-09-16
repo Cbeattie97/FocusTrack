@@ -56,3 +56,56 @@ function updateTaskStatus(taskId, newStatus) {
         alert('An error occurred while updating the task status');
     });
 }
+
+let currentEditingTaskId = null;
+
+function showEditTaskModal(taskId) {
+    const taskElement = document.getElementById(`task-${taskId}`);
+    const title = taskElement.querySelector('h3').textContent;
+    const description = taskElement.querySelector('p').textContent;
+
+    document.getElementById('editTaskTitle').value = title;
+    document.getElementById('editTaskDescription').value = description;
+    document.getElementById('editTaskTag').value = '';
+
+    currentEditingTaskId = taskId;
+    document.getElementById('editTaskModal').classList.remove('hidden');
+}
+
+function closeEditTaskModal() {
+    document.getElementById('editTaskModal').classList.add('hidden');
+    currentEditingTaskId = null;
+}
+
+function saveTaskEdit() {
+    const title = document.getElementById('editTaskTitle').value;
+    const description = document.getElementById('editTaskDescription').value;
+    const tag = document.getElementById('editTaskTag').value;
+
+    fetch(`/api/tasks/${currentEditingTaskId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title, description, tag })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const taskElement = document.getElementById(`task-${currentEditingTaskId}`);
+            taskElement.querySelector('h3').textContent = title;
+            taskElement.querySelector('p').textContent = description;
+            // Add tag to the task card if needed
+            closeEditTaskModal();
+        } else {
+            alert('Failed to update task: ' + (data.message || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while updating the task');
+    });
+}
+
+document.getElementById('closeTaskEdit').addEventListener('click', closeEditTaskModal);
+document.getElementById('saveTaskEdit').addEventListener('click', saveTaskEdit);
