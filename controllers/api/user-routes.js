@@ -4,47 +4,6 @@ const bcrypt = require('bcrypt');
 
 // The `/api/users` endpoint
 
-router.get('/', async (req, res) => {
-    // find all users
-    try {
-        const userData = await User.findAll({
-            // include: [{ model: }],
-            attributes: { exclude: ['password_hash'] }
-        }).catch((err) => {
-            res.json(err);
-        });
-
-        // TODO const users = userData.map((user) => user.get({ plain: true }));
-        // res.render('homepage', { users });
-        res.status(200).json(userData);
-
-    } catch {
-        res.status(500).json({ message: 'Error retreiving users' });
-    }
-});
-
-router.get('/:id', async (req, res) => {
-    // find a single user by id
-    try {
-        const userData = await User.findByPk(req.params.id, {
-            // TODO include: [{ model: Product }],
-            attributes: { exclude: ['password_hash'] },
-        });
-
-        if (!userData) {
-            res.status(404).json({ message: 'No user found with that id!' });
-            return;
-        }
-
-        // TODO const users = userData.get({ plain: true });
-        // res.render('homepage', { users });
-        res.status(200).json(userData);
-
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
-
 router.post('/', async (req, res) => {
     // create a new user
     try {
@@ -65,6 +24,7 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
+  // login a user
   try {
     const userID = req.body.username; 
     let findOneqry = {};
@@ -126,7 +86,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-//  TODO should be able to delete via username or email? TBC additional functionality required
+//  TODO: FUTURE IMPROVEMENT - delete user via username or email
 // router.delete('/:id', async (req, res) => {
 //     // delete a user by id
 //     try {
@@ -149,6 +109,7 @@ router.put('/:id', async (req, res) => {
 // });
 
 router.post('/logout', (req, res) => {
+  // logout a user
     if (req.session.logged_in) {
       req.session.destroy(() => {
         res.status(204).end();
